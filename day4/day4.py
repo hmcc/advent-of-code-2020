@@ -38,7 +38,7 @@ def is_valid_hgt(hgt):
             units = matcher.group(2)
             if units == 'cm':
                 return 150 <= value <= 193
-            elif units == 'in':
+            if units == 'in':
                 return 59 <= value <= 76
         return False
     except ValueError:
