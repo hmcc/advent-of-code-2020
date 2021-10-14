@@ -1,8 +1,8 @@
-name: GitHub Actions Demo
+name: GitHub Actions
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Code-Style:
     runs-on: ubuntu-latest
     steps:
-      - name: Python Style Checker
-        uses: andymckay/pycodestyle-action@0.1.3
+      - name: PEP8 Action
+        uses: quentinguidee/pep8-action@v1
