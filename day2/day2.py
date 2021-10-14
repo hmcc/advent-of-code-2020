@@ -26,7 +26,7 @@ def parse(line):
 
 def count_matches():
     count = 0
-    with open('input') as file:
+    with open('day2/input') as file:
         for line in file:
             line = line.rstrip()
             try:
