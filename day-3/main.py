@@ -4,12 +4,14 @@ def read_input(filename):
         for line in file:
             item = line.rstrip()
             if item:
-                row = [char=='#' for char in item]
+                row = [char == '#' for char in item]
                 rows.append(row)
     return rows
 
+
 def dimensions(trees):
     return (len(trees[0]), len(trees))
+
 
 def has_tree(trees, x, y):
     try:
@@ -17,8 +19,10 @@ def has_tree(trees, x, y):
     except IndexError:
         return True
 
+
 def move(x, y, x1, y1):
     return (x + x1, y + y1)
+
 
 def count_trees(trees, x_slope, y_slope):
     x = y = 0

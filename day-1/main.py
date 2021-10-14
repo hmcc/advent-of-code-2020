@@ -18,6 +18,7 @@ def find_two(items, total):
                 return (value1, value2)
     raise IndexError
 
+
 def find_three(items, total):
     for idx1, value1 in enumerate(items):
         try:
