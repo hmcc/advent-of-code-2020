@@ -28,7 +28,7 @@ def find_three(items, total):
             pass
 
 
-expenses = read_input('input')
+expenses = read_input('day1/input')
 
 # Find 2 values satisfying x + y = 2020
 answer1, answer2 = find_two(expenses, 2020)

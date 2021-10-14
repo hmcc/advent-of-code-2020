@@ -36,7 +36,7 @@ def count_trees(trees, x_slope, y_slope):
     return count
 
 
-tree_map = read_input('input')
+tree_map = read_input('day3/input')
 width, height = dimensions(tree_map)
 
 total = 1

@@ -78,4 +78,4 @@ def count_matches(filename):
     return sum(is_valid(passport) for passport in passports)
 
 
-print(count_matches('input'))
+print(count_matches('day4/input'))
