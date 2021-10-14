@@ -2,18 +2,18 @@ name: GitHub Actions
 on: [push]
 jobs:
   Code-Style:
-    runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
       - name: Python Code Quality and Lint
         uses: ricardochaves/python-lint@v1.3.0
         with:
           python-root-list: "**/*.py"
           use-black: false
           extra-pycodestyle-options: "--max-line-length=120"
+  Test:
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
       - name: Pytest
         uses: fylein/python-pytest-github-action@v2
