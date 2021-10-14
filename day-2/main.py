@@ -1,31 +1,33 @@
 import re
-p = re.compile('(\d+)-(\d+) ([a-z]): ([a-z]*)')
+p = re.compile(r'(\d+)-(\d+) ([a-z]): ([a-z]*)')
 
-def passwordMatchPolicyOne(password, letter, minCount, maxCount):
+def password_match_policy_one(password, letter, min_count, max_count):
     count = password.count(letter)
-    return count >= minCount and count <= maxCount
+    return min_count <= count <= max_count
 
-def passwordMatchPolicyTwo(password, letter, position1, position2):
+def password_match_policy_two(password, letter, position1, position2):
     return (password[position1-1] == letter) ^ (password[position2-1] == letter)
 
 def parse(line):
-    m = p.match(line)
-    if m:
-        return(int(m.group(1)), int(m.group(2)), m.group(3), m.group(4))
+    matcher = p.match(line)
+    if matcher:
+        return(int(matcher.group(1)), int(matcher.group(2)), matcher.group(3), matcher.group(4))
     raise ValueError
 
+def count_matches():
+    count = 0
+    with open('input') as file:
+        for line in file:
+            line = line.rstrip()
+            try:
+                value1, value2, letter, password = parse(line)
+                if password_match_policy_two(password, letter, value1, value2):
+                    count += 1
+            except IndexError:
+                print(f'"{line}" cannot be checked against the rule')
+            except ValueError:
+                print(f'"{line}" does not match the expected format')
+    return count
 
-correct = 0
-with open('input') as file:
-    for line in file:
-        line = line.rstrip()
-        try:
-            value1, value2, letter, password = parse(line)
-            if passwordMatchPolicyTwo(password, letter, value1, value2):
-                correct += 1
-        except IndexError:
-            print(f'"{line}" cannot be checked against the rule')
-        except ValueError:
-            print(f'"{line}" does not match the expected format')
 
-print (correct)
+print (count_matches())
