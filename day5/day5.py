@@ -4,10 +4,7 @@ def read_input(filename):
         for line in file:
             item = line.rstrip()
             if item:
-                try:
-                    items.append(item)
-                except ValueError:
-                    print(f'"{item}" is not an integer')
+                items.append(item)
     return items
 
 
