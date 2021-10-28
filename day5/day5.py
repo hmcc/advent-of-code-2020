@@ -27,4 +27,9 @@ def seat_id(seat_code):
 
 seat_codes = read_input('day5/input')
 seat_ids = [seat_id(seat_code) for seat_code in seat_codes]
-print(max(seat_ids))
+seat_ids.sort()
+print(seat_ids[-1])
+
+expected_seat_ids = list(range(seat_ids[0], seat_ids[-1]))
+diff = [x for x in expected_seat_ids if x not in seat_ids]
+print(diff[0])
