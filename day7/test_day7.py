@@ -21,6 +21,13 @@ def test_learn_parents():
     }
 
 
+def test_learn_children():
+    extracted = day7.learn_children('light red bags contain 1 bright white bag, 2 muted yellow bags.')
+    assert extracted == {
+        'light red': {('bright white', 1), ('muted yellow', 2)}
+    }
+
+
 def test_learn_parents_no_children():
     extracted = day7.learn_parents('faded blue bags contain no other bags.')
     assert extracted == {}
