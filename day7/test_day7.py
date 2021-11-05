@@ -14,16 +14,16 @@ def test_color_child_plural():
 
 
 def test_learn_parents():
-    extracted = day7.learn_parents('light red bags contain 1 bright white bag, 2 muted yellow bags.')
-    assert extracted == {
+    result = day7.learn_parents('light red bags contain 1 bright white bag, 2 muted yellow bags.')
+    assert result == {
         'bright white': {'light red'},
         'muted yellow': {'light red'}
     }
 
 
 def test_learn_children():
-    extracted = day7.learn_children('light red bags contain 1 bright white bag, 2 muted yellow bags.')
-    assert extracted == {
+    result = day7.learn_children('light red bags contain 1 bright white bag, 2 muted yellow bags.')
+    assert result == {
         'light red': {('bright white', 1), ('muted yellow', 2)}
     }
 
