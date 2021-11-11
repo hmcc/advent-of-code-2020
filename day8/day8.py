@@ -16,28 +16,28 @@ def parse_line(line):
 
 def execute_instruction(program, pointer, acc):
     instruction = program[pointer]
-    if (instruction[0] == 'acc'):
+    if instruction[0] == 'acc':
         acc = acc + instruction[1]
         pointer = pointer + 1
-    elif(instruction[0] == 'jmp'):
+    elif instruction[0] == 'jmp':
         pointer = pointer + instruction[1]
-    elif(instruction[0] == 'nop'):
+    elif instruction[0] == 'nop':
         pointer = pointer + 1
     else:
         print(f'invalid instruction at {pointer}: {instruction}')
         pointer = pointer + 1
     return (pointer, acc)
-    
+
 
 def print_error(program, pointer, acc):
-    print(f'duplicate instruction found at {pointer} {program[pointer][:2]} visited at {program[pointer][2:]}')
+    print(f'duplicate found at {pointer} {program[pointer][:2]} visited at {program[pointer][2:]}')
     print(f'accumulator is {acc}')
 
 
 def swap(instruction):
-    if (instruction[0] == 'jmp'):
+    if instruction[0] == 'jmp':
         instruction[0] = 'nop'
-    elif(instruction[0] == 'nop' and instruction[1] != 0):
+    elif instruction[0] == 'nop' and instruction[1] != 0:
         instruction[0] = 'jmp'
     else:
         print(f'invalid instruction for swap {instruction}')
@@ -63,9 +63,9 @@ def execute(program):
     pointer = acc = 0
     counter = 1
     program = reset(program)
-    while (pointer < len(program)):
+    while pointer < len(program):
         program[pointer].append(counter)
-        if (len(program[pointer]) > 3):
+        if len(program[pointer]) > 3:
             print_error(program, pointer, acc)
             break
         pointer, acc = execute_instruction(program, pointer, acc)
