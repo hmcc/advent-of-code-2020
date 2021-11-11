@@ -1,13 +1,19 @@
-def windows(filename, window_size):
-    window = []
+def read_input(filename):
+    input = []
     with open(filename) as file:
         for line in file:
-            number = int(line.strip())
-            window.append(number)
-            while len(window) > window_size:
-                del window[0]
-            if len(window) == window_size:
-                yield window
+            input.append(int(line.strip()))
+    return input
+
+
+def windows(input, window_size):
+    window = []
+    for number in input:
+        window.append(number)
+        while len(window) > window_size:
+            del window[0]
+        if len(window) == window_size:
+            yield window
 
 
 def find_two(items, total):
@@ -17,9 +23,21 @@ def find_two(items, total):
     return False
 
 
-size = 25
-generator = windows('day9/input', size+1)
+input = read_input('day9/input')
+window_size = 25
+generator = windows(input, window_size+1)
 for window in generator:
-    if not find_two(window[:size], window[size]):
-        print(window[size])
+    if not find_two(window[:window_size], window[window_size]):
         break
+
+
+target = window[window_size]
+print(target)
+
+for size in range(2, len(input)):
+    generator = windows(input, size)
+    for window in generator:
+        if sum(window) == target:
+            print(window)
+            print(f'{min(window)} + {max(window)} = {min(window) + max(window)}')
+            break
