@@ -34,8 +34,8 @@ for window in generator:
 target = window[window_size]
 print(target)
 
-for window_size in range(2, len(input)):
-    generator = windows(input, window_size)
+for window_size in range(2, len(input_values)):
+    generator = windows(input_values, window_size)
     for window in generator:
         if sum(window) == target:
             print(window)
