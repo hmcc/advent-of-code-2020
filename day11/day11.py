@@ -4,7 +4,7 @@ def read_input(filename):
         for line in file:
             item = line.rstrip()
             if item:
-                row = [char for char in item]
+                row = list(item)
                 rows.append(row)
     return rows
 
@@ -26,7 +26,9 @@ def adjacent_seats(seat_map, column, row):
 def move_until_seat(seat_map, origin, direction):
     x, y = origin
     x1, y1 = direction
-    while (x, y) == origin or (0 <= y < len(seat_map) and 0 <= x < len(seat_map[0]) and floor(seat_map[y][x])):
+    x = x + x1
+    y = y + y1
+    while 0 <= y < len(seat_map) and 0 <= x < len(seat_map[0]) and floor(seat_map[y][x]):
         x = x + x1
         y = y + y1
     return (x, y) if 0 <= y < len(seat_map) and 0 <= x < len(seat_map[0]) else None

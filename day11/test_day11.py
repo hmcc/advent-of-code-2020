@@ -134,7 +134,7 @@ def test_visible_seat_coordinates_some():
     expected = [
         (3, 1)
     ]
-    assert day11.visible_seat_coordinates(seat_map, y, x) == expected
+    assert day11.visible_seat_coordinates(seat_map, x, y) == expected
 
 
 def test_visible_seat_coordinates_none():
@@ -162,4 +162,4 @@ def test_visible_seat_coordinates_none():
     y = 3
     assert seat_map[y][x] == 'L'
 
-    assert len(day11.visible_seat_coordinates(seat_map, y, x)) == 0
+    assert len(day11.visible_seat_coordinates(seat_map, x, y)) == 0
