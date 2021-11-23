@@ -23,8 +23,44 @@ def adjacent_seats(seat_map, column, row):
     return adjacent
 
 
+def move_until_seat(seat_map, origin, direction):
+    x, y = origin
+    x1, y1 = direction
+    while (x, y) == origin or (0 <= y < len(seat_map) and 0 <= x < len(seat_map[0]) and floor(seat_map[y][x])):
+        x = x + x1
+        y = y + y1
+    return (x, y) if 0 <= y < len(seat_map) and 0 <= x < len(seat_map[0]) else None
+
+
+def visible_seat_coordinates(seat_map, x, y):
+    visible = []
+    directions = (
+        (-1, -1),
+        (0, -1),
+        (1, -1),
+        (1, 0),
+        (1, 1),
+        (0, 1),
+        (-1, 1),
+        (-1, 0)
+    )
+    for d in directions:
+        visible_seat = move_until_seat(seat_map, (x, y), d)
+        if visible_seat:
+            visible.append(visible_seat)
+    return visible
+
+
+def visible_seats(seat_map, x, y):
+    return [seat_map[y][x] for x, y in visible_seat_coordinates(seat_map, x, y)]
+
+
 def empty(seat):
     return seat == 'L'
+
+
+def floor(seat):
+    return seat == '.'
 
 
 def occupied(seat):
@@ -35,16 +71,16 @@ def all_unoccupied(seat_list):
     return all([not occupied(seat) for seat in seat_list])
 
 
-def four_or_more_occupied(seat_list):
-    return [occupied(seat) for seat in seat_list].count(True) >= 4
+def five_or_more_occupied(seat_list):
+    return [occupied(seat) for seat in seat_list].count(True) >= 5
 
 
 def should_occupy(seat_map, x, y):
-    return empty(seat_map[y][x]) and all_unoccupied(adjacent_seats(seat_map, x, y))
+    return empty(seat_map[y][x]) and all_unoccupied(visible_seats(seat_map, x, y))
 
 
 def should_vacate(seat_map, x, y):
-    return occupied(seat_map[y][x]) and four_or_more_occupied(adjacent_seats(seat_map, x, y))
+    return occupied(seat_map[y][x]) and five_or_more_occupied(visible_seats(seat_map, x, y))
 
 
 def should_flip(seat_map, x, y):
@@ -87,5 +123,6 @@ prev_seats = [[None] * len(seats[0])] * len(seats)
 while seats != prev_seats:
     prev_seats = seats
     seats = update(prev_seats)
+    pretty_print(seats)
 
 print(count_occupied(seats))
